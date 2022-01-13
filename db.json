@@ -14,7 +14,13 @@
       "vote": {
         "agree": 0,
         "disagree": 0
-      }
+      },
+      "recentComments": [
+        {
+          "comment": "댓글입니다. 나는 반대",
+          "id": 1
+        }
+      ]
     },
     {
       "title": "두번째 이슈입니다 저는 찬성찬성",
@@ -23,7 +29,17 @@
       "vote": {
         "agree": 0,
         "disagree": 0
-      }
+      },
+      "recentComments": [
+        {
+          "comment": "댓글입니다. 나는 찬성",
+          "id": 1
+        },
+        {
+          "comment": "댓글입니다. 나도 찬성",
+          "id": 2
+        }
+      ]
     }
   ],
   "comments": [
@@ -33,6 +49,19 @@
         {
           "comment": "댓글입니다. 나는 반대",
           "id": 1
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "items": [
+        {
+          "comment": "댓글입니다. 나는 찬성",
+          "id": 1
+        },
+        {
+          "comment": "댓글입니다. 나도 찬성",
+          "id": 2
         }
       ]
     }
