@@ -1,0 +1,18 @@
+version: 0.2
+
+phases:
+    pre_build:
+        commands:
+            - aws --version
+            - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin "$(aws sts get-caller-identity --query Account --output text).dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com"
+            - TARGET_TAG=$TARGET_ENVIRONMENT-$CODEBUILD_BUILD_NUMBER
+    build:
+        commands:
+            - ./docker-build.sh $TARGET_ENVIRONMENT
+            - docker tag create-web-$TARGET_ENVIRONMENT $TARGET_URI_ECR:$TARGET_TAG
+    post_build:
+        commands:
+            - docker push $TARGET_URI_ECR:$TARGET_TAG
+            - printf '[{"name":"%s","imageUri":"%s"}]' $TARGET_CONTAINER_ECS $TARGET_URI_ECR:$TARGET_TAG > imagedefinitions.json
+artifacts:
+    files: imagedefinitions.json
