@@ -85,6 +85,9 @@ const Container = styled.section`
       margin-top: 35px;
       cursor: pointer;
     }
+    p {
+      color: red;
+    }
   }
 `;
 
