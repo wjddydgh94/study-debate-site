@@ -11,7 +11,7 @@ function AppLayout({ children }: AppLayoutPropsType) {
     <Wrapper>
       <Header />
       <Main>{children}</Main>
-      <Footer></Footer>
+      <Footer>footer입니당</Footer>
     </Wrapper>
   );
 }

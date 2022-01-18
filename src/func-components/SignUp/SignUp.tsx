@@ -1,0 +1,67 @@
+import React from "react";
+import styled from "styled-components";
+
+const SignUp = () => {
+  return (
+    <Wrapper>
+      <Container>
+        <h1>가입하기</h1>
+        <form>
+          <input type="text" placeholder="이메일을 입력해주세요." />
+          <input type="password" placeholder="비밀번호를 입력해주세요." />
+          <input type="submit" value="회원가입" />
+        </form>
+      </Container>
+    </Wrapper>
+  );
+};
+
+const Wrapper = styled.article`
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 40px 0;
+`;
+
+const Container = styled.section`
+  background-color: #fff;
+  text-align: center;
+  padding: 60px;
+  h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 50px;
+  }
+  form {
+    input[type=\"text\"],
+    input[type=\"password\"] {
+      width: 100%;
+      border: 1px solid rgb(221, 221, 221);
+      background: rgb(250, 250, 250);
+      height: 55px;
+      margin-bottom: 15px;
+      padding: 0 15px;
+
+      &:-webkit-autofill,
+      &:-webkit-autofill:hover,
+      &:-webkit-autofill:focus,
+      &:-webkit-autofill:active {
+        transition: background-color 5000s;
+      }
+    }
+    input[type=\"submit\"] {
+      width: 100%;
+      background: #2f3747;
+      border-radius: 5px;
+      height: 60px;
+      color: #fff;
+      box-shadow: 0px 4px 2px 0px rgb(0 0 0 / 25%);
+      font-size: 15px;
+      font-weight: bold;
+      margin-top: 35px;
+      cursor: pointer;
+    }
+  }
+`;
+
+export default SignUp;
