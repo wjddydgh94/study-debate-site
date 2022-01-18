@@ -1,14 +1,38 @@
 import React from "react";
 import styled from "styled-components";
+import useSignUp from "./hooks/useSignUp";
 
 const SignUp = () => {
+  const {
+    hookForm: {
+      register,
+      formState: { errors },
+      handleSubmit,
+    },
+    handleSignUp,
+  } = useSignUp();
   return (
     <Wrapper>
       <Container>
         <h1>가입하기</h1>
-        <form>
-          <input type="text" placeholder="이메일을 입력해주세요." />
-          <input type="password" placeholder="비밀번호를 입력해주세요." />
+        <form onSubmit={handleSubmit(handleSignUp)}>
+          <input
+            type="text"
+            {...register("email", {
+              required: { value: true, message: "이메일을 입력해주세요." },
+            })}
+            placeholder="이메일을 입력해주세요."
+          />
+          <input
+            type="password"
+            {...register("password", {
+              required: { value: true, message: "비밀번호를 입력해주세요." },
+            })}
+            placeholder="비밀번호를 입력해주세요."
+          />
+          {(errors.email || errors.password) && (
+            <p>이메일과 비밀번호를 입력해주세요</p>
+          )}
           <input type="submit" value="회원가입" />
         </form>
       </Container>
