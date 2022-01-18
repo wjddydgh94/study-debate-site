@@ -1,5 +1,69 @@
 {
-  "posts": [{ "id": 1, "title": "json-server", "author": "typicode" }],
-  "comments": [{ "id": 1, "body": "some comment", "postId": 1 }],
-  "profile": { "name": "typicode" }
+  "users": [
+    {
+      "email": "wjddydgh94@naver.com",
+      "password": "$2a$10$hOJWX4x91.e6kQlDn8tuJexy.NVPtFL3iEL2IMZSPMzsERc1sWa06",
+      "id": 1
+    }
+  ],
+  "issues": [
+    {
+      "title": "첫번째 이슈 동의하시나요",
+      "description": "이 의견에 동의 하시나요?이 의견에 동의 하시나요?이 의견에 동의 하시나요?이 의견에 동의 하시나요?이 의견에 동의 하시나요?이 의견에 동의 하시나요?이 의견에 동의 하시나요?이 의견에 동의 하시나요?이 의견에 동의 하시나요?이 의견에 동의 하시나요?",
+      "id": 1,
+      "vote": {
+        "agree": 0,
+        "disagree": 0
+      },
+      "recentComments": [
+        {
+          "comment": "댓글입니다. 나는 반대",
+          "id": 1
+        }
+      ]
+    },
+    {
+      "title": "두번째 이슈입니다 저는 찬성찬성",
+      "description": "내용은 별거없죠?내용은 별거없죠?내용은 별거없죠?내용은 별거없죠?내용은 별거없죠?내용은 별거없죠?내용은 별거없죠?내용은 별거없죠?내용은 별거없죠?내용은 별거없죠?",
+      "id": 2,
+      "vote": {
+        "agree": 0,
+        "disagree": 0
+      },
+      "recentComments": [
+        {
+          "comment": "댓글입니다. 나는 찬성",
+          "id": 1
+        },
+        {
+          "comment": "댓글입니다. 나도 찬성",
+          "id": 2
+        }
+      ]
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "items": [
+        {
+          "comment": "댓글입니다. 나는 반대",
+          "id": 1
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "items": [
+        {
+          "comment": "댓글입니다. 나는 찬성",
+          "id": 1
+        },
+        {
+          "comment": "댓글입니다. 나도 찬성",
+          "id": 2
+        }
+      ]
+    }
+  ]
 }
