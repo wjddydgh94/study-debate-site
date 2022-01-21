@@ -1,13 +1,21 @@
-import axios from "axios";
+import { SignUpUrlRequestType } from "@/types/auth";
 
-interface SignUpUrlRequestType {
-  email: string;
-  password: string;
-}
+import { callApi } from "./config";
 
-export const signUpUrl = async (req: SignUpUrlRequestType) => {
-  return await axios({
-    url: "user",
+export const signUpUrl = (req: SignUpUrlRequestType) => {
+  return callApi({
+    url: "/register",
+    method: "POST",
+    data: {
+      email: req.email,
+      password: req.password,
+    },
+  });
+};
+
+export const signInUrl = (req: SignUpUrlRequestType) => {
+  return callApi({
+    url: "/login",
     method: "POST",
     data: {
       email: req.email,

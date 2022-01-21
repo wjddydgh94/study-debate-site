@@ -2,8 +2,13 @@
   "users": [
     {
       "email": "wjddydgh94@naver.com",
-      "password": "$2a$10$hOJWX4x91.e6kQlDn8tuJexy.NVPtFL3iEL2IMZSPMzsERc1sWa06",
+      "password": "$2a$10$M3Q2g5oSJnIU7B7/8FL/DuADpDQM2BgzDeuPl/ZhtnV0IQLjHYL3O",
       "id": 1
+    },
+    {
+      "email": "wjddydgh94@naver.com1",
+      "password": "$2a$10$F8tUfHLVPgKLfHEsyTLltepaVcF00nG..2GWhxOaTUVjVwptgixuW",
+      "id": 2
     }
   ],
   "issues": [

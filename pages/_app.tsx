@@ -1,14 +1,14 @@
-import React, { useEffect, useMemo } from 'react';
-import type { AppProps } from 'next/app';
-import { NextPage, NextPageContext } from 'next';
-import { useStore } from 'react-redux';
-import configStore, { ReduxStoreType } from '@/redux/store';
-import { PersistGate } from 'redux-persist/integration/react';
-import { Persistor } from 'redux-persist/es/types';
-import AppLayout from '@/components/AppLayout/AppLayout';
-import '@/styles/globals.css';
-import usePersistSync from '@/hooks/usePersistSync';
-import { PersistSyncStateType } from '@/redux/reducers/storage';
+import React, { useEffect, useMemo } from "react";
+import type { AppProps } from "next/app";
+import { NextPage, NextPageContext } from "next";
+import { useStore } from "react-redux";
+import configStore, { ReduxStoreType } from "@/redux/store";
+import { PersistGate } from "redux-persist/integration/react";
+import { Persistor } from "redux-persist/es/types";
+import AppLayout from "@/components/AppLayout/AppLayout";
+import "@/styles/globals.css";
+import usePersistSync from "@/hooks/usePersistSync";
+import { PersistSyncStateType } from "@/redux/reducers/storage";
 
 function RootApp(appProps: AppProps) {
   const store = useStore();
@@ -18,7 +18,7 @@ function RootApp(appProps: AppProps) {
     console.log(`stage : ${process.env.NEXT_PUBLIC_STAGE}`);
   }, []);
 
-  console.log('RootApp state: ', persistSyncState);
+  console.log("RootApp state: ", persistSyncState);
 
   return (
     <PersistGate
@@ -46,7 +46,7 @@ function PersistSyncApp({
   handlePersistSyncState: (state: PersistSyncStateType) => void;
 }) {
   useEffect(() => {
-    handlePersistSyncState(isSync ? 'DONE' : 'LOADING');
+    handlePersistSyncState(isSync ? "DONE" : "LOADING");
   }, [handlePersistSyncState, isSync]);
 
   return (
@@ -66,7 +66,7 @@ RootApp.getInitialProps = async ({
   const pageProps: any = Component.getInitialProps
     ? await Component.getInitialProps(ctx)
     : {};
-  console.log('RootApp.getInitialProps');
+  console.log("RootApp.getInitialProps");
 
   return { pageProps };
 };

@@ -1,12 +1,23 @@
+import { signUpUrl } from "@/api/auth";
+import { SignUpUrlRequestType } from "@/types/auth";
 import React from "react";
 import { useForm } from "react-hook-form";
+import Router from "next/router";
 
 const useSignUp = () => {
   const hookForm = useForm({
-    mode: "onSubmit",
+    mode: "onBlur",
   });
 
-  const handleSignUp = () => {};
+  const handleSignUp = async (formData: SignUpUrlRequestType) => {
+    const res = await signUpUrl(formData);
+    if (res.status === 201) {
+      alert("회원가입이 완료되었습니다.");
+      Router.push("/sign-in");
+    } else {
+      alert(res.data);
+    }
+  };
 
   return { hookForm, handleSignUp };
 };

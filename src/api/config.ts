@@ -3,15 +3,15 @@ import axios, {
   AxiosRequestConfig,
   AxiosResponse,
   Method,
-} from 'axios';
-import { Store } from 'redux';
+} from "axios";
+import { Store } from "redux";
 
 const createInstance = () => {
   return axios.create({
-    baseURL: process.env.NEXT_PUBLIC_BASE_API_URL,
+    baseURL: "http://localhost:3000",
     headers: {
       timeout: 5 * 60 * 1000, // default timeout
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
   });
 };
@@ -40,10 +40,10 @@ export const setupAxios = ({
   store,
 }: SetupAxiosType) => {
   instance.interceptors.request.eject(
-    requestInterceptorSeqStorage[instanceKey],
+    requestInterceptorSeqStorage[instanceKey]
   );
   instance.interceptors.response.eject(
-    responseInterceptorSeqStorage[instanceKey],
+    responseInterceptorSeqStorage[instanceKey]
   );
 
   const requestInterceptor =
@@ -59,23 +59,23 @@ export const setupAxios = ({
     requestInterceptor(store),
     (error) => {
       return Promise.reject(error);
-    },
+    }
   );
 
   const loggingForResponse = (response: AxiosResponse) => {
     const originalRequest = response.config as CustomInterceptorRequestConfig;
     console.log(`[AXIOS RESPONSE URL : ${originalRequest?.url}]`);
-    console.log(' 1. ORIGINAL REQUEST');
+    console.log(" 1. ORIGINAL REQUEST");
     console.table(originalRequest);
-    console.log(' 2. RESPONSE');
+    console.log(" 2. RESPONSE");
     console.table(response, [
-      'code',
-      'content-type',
-      'url',
-      'baseUrl',
-      'method',
+      "code",
+      "content-type",
+      "url",
+      "baseUrl",
+      "method",
     ]);
-    console.log(' 3. RESPONSE BODY DATA');
+    console.log(" 3. RESPONSE BODY DATA");
     console.table(response?.data?.data);
   };
 
@@ -104,29 +104,29 @@ export interface CallApiType {
 }
 
 export type HttpContentType =
-  | 'application/json'
-  | 'application/x-www-form-urlencoded'
-  | 'multipart/form-data'
-  | 'form-data';
+  | "application/json"
+  | "application/x-www-form-urlencoded"
+  | "multipart/form-data"
+  | "form-data";
 
 export const callApi = ({
   url,
   method,
   data,
-  contentType = 'application/json',
+  contentType = "application/json",
   config,
 }: CallApiType) => {
   return defaultInstance({
     method: method,
     url: url,
     data: data || {},
-    params: method === 'GET' ? data : {},
+    params: method === "GET" ? data : {},
     headers: {
-      'Content-Type': contentType,
+      "Content-Type": contentType,
     },
     ...config,
   }).catch((error) => {
-    console.error('api error', error);
+    console.error("api error", error);
     return error.response;
   });
 };

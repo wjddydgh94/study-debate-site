@@ -1,21 +1,21 @@
 import React from "react";
 import styled from "styled-components";
-import useSignUp from "./hooks/useSignUp";
+import useSignIn from "./hooks/useSignIn";
 
-const SignUp = () => {
+const SignIn = () => {
   const {
     hookForm: {
       register,
       formState: { errors },
       handleSubmit,
     },
-    handleSignUp,
-  } = useSignUp();
+    handleSignIn,
+  } = useSignIn();
   return (
     <Wrapper>
       <Container>
-        <h1>가입하기</h1>
-        <form onSubmit={handleSubmit(handleSignUp)}>
+        <h1>로그인</h1>
+        <form onSubmit={handleSubmit(handleSignIn)}>
           <input
             type="text"
             {...register("email", {
@@ -37,7 +37,7 @@ const SignUp = () => {
               비밀번호는 영어 소문자와 영어 대문자를 포함해야합니다.
             </p>
           )}
-          <input type="submit" value="회원가입" />
+          <input type="submit" value="로그인" />
         </form>
       </Container>
     </Wrapper>
@@ -95,4 +95,4 @@ const Container = styled.section`
   }
 `;
 
-export default SignUp;
+export default SignIn;
