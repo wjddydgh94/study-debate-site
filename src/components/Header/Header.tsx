@@ -2,21 +2,35 @@ import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
 
-const Header = () => {
+interface HeaderPropsType {
+  isLoggedIn: boolean;
+}
+
+const Header = ({ isLoggedIn }: HeaderPropsType) => {
   return (
     <HeaderWrapper>
       <ul>
-        <li>
-          <Link href="/sign-in">
-            <a href="#">로그인</a>
-          </Link>
-        </li>
-        <span className="seperate">|</span>
-        <li>
-          <Link href="/sign-up">
-            <a href="#">회원가입</a>
-          </Link>
-        </li>
+        {isLoggedIn ? (
+          <li>
+            <Link href="/">
+              <a href="#">로그아웃</a>
+            </Link>
+          </li>
+        ) : (
+          <>
+            <li>
+              <Link href="/sign-in">
+                <a href="#">로그인</a>
+              </Link>
+            </li>
+            <span className="seperate">|</span>
+            <li>
+              <Link href="/sign-up">
+                <a href="#">회원가입</a>
+              </Link>
+            </li>
+          </>
+        )}
       </ul>
     </HeaderWrapper>
   );

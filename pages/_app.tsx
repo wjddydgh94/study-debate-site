@@ -1,7 +1,7 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import type { AppProps } from "next/app";
 import { NextPage, NextPageContext } from "next";
-import { useStore } from "react-redux";
+import { RootStateOrAny, useSelector, useStore } from "react-redux";
 import configStore, { ReduxStoreType } from "@/redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 import { Persistor } from "redux-persist/es/types";
@@ -45,12 +45,22 @@ function PersistSyncApp({
   isSync: boolean;
   handlePersistSyncState: (state: PersistSyncStateType) => void;
 }) {
+  const { accessToken } = useSelector((state: RootStateOrAny) => ({
+    accessToken: state.auth.accessToken,
+  }));
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    accessToken && setIsLoggedIn(true);
+  }, [accessToken]);
+
   useEffect(() => {
     handlePersistSyncState(isSync ? "DONE" : "LOADING");
   }, [handlePersistSyncState, isSync]);
 
   return (
-    <AppLayout {...pageProps}>
+    <AppLayout isLoggedIn={isLoggedIn} {...pageProps}>
       <Component {...pageProps} />
     </AppLayout>
   );

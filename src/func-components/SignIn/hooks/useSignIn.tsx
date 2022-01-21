@@ -1,10 +1,10 @@
 import { signInUrl } from "@/api/auth";
 import { SignInUrlRequestType } from "@/types/auth";
-import React from "react";
+import React, { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import Router from "next/router";
 import { useDispatch } from "react-redux";
-import { signIn } from "@/redux/reducers/auth";
+import { changeAccessTokenAction } from "@/redux/reducers/auth";
 
 const useSignIn = () => {
   const dispatch = useDispatch();
@@ -17,7 +17,7 @@ const useSignIn = () => {
     const res = await signInUrl(formData);
     console.log(res);
     if (res.status === 200) {
-      dispatch(signIn(res.data.accessToken));
+      dispatch(changeAccessTokenAction(res.data.accessToken));
       Router.push("/");
     } else {
       alert(res.data);

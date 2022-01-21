@@ -4,12 +4,13 @@ import Header from "../Header";
 
 export interface AppLayoutPropsType {
   children: React.ReactChild;
+  isLoggedIn: boolean;
 }
 
-function AppLayout({ children }: AppLayoutPropsType) {
+function AppLayout({ children, isLoggedIn }: AppLayoutPropsType) {
   return (
     <Wrapper>
-      <Header />
+      <Header isLoggedIn={isLoggedIn} />
       <Main>{children}</Main>
       <Footer>footer입니당</Footer>
     </Wrapper>
