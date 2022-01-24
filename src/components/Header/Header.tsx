@@ -1,21 +1,19 @@
 import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
+import useHeader from "./hooks/useHeader";
 
 interface HeaderPropsType {
   isLoggedIn: boolean;
 }
 
 const Header = ({ isLoggedIn }: HeaderPropsType) => {
+  const { handleSignOut } = useHeader();
   return (
     <HeaderWrapper>
       <ul>
         {isLoggedIn ? (
-          <li>
-            <Link href="/">
-              <a href="#">로그아웃</a>
-            </Link>
-          </li>
+          <li onClick={handleSignOut}>로그아웃</li>
         ) : (
           <>
             <li>
@@ -49,6 +47,11 @@ const HeaderWrapper = styled.header`
     justify-content: flex-end;
     align-items: center;
     li {
+      color: #fff;
+      font-size: 16px;
+      line-height: 16px;
+      font-weight: bold;
+      cursor: pointer;
       a {
         color: #fff;
         font-size: 16px;

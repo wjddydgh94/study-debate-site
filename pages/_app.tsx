@@ -52,8 +52,14 @@ function PersistSyncApp({
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    accessToken && setIsLoggedIn(true);
+    accessToken ? setIsLoggedIn(true) : setIsLoggedIn(false);
   }, [accessToken]);
+
+  // let isLoggedIn = false;
+
+  // useMemo(() => {
+  //   accessToken ? (isLoggedIn = true) : (isLoggedIn = false);
+  // }, [accessToken]);
 
   useEffect(() => {
     handlePersistSyncState(isSync ? "DONE" : "LOADING");
