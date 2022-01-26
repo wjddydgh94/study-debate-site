@@ -1,7 +1,7 @@
-import React from 'react';
-import Head from 'next/head';
-import Link from 'next/link';
-import styled from 'styled-components';
+import React from "react";
+import Head from "next/head";
+import Link from "next/link";
+import styled from "styled-components";
 
 export default function Home() {
   return (
@@ -13,27 +13,34 @@ export default function Home() {
       </Head>
 
       <main className="main">
-        <h1 className="title">
-          Welcome to <a href="#">Insterior BoilerPlate</a>
-        </h1>
-
-        <p className="description">
-          Get started by editing
-          <code className="code">pages/index.js</code>
-        </p>
-
-        <div className="grid">
-          <Link href="/todo">
-            <a className="card">
-              <h2>To do list&rarr;</h2>
-            </a>
-          </Link>
-          <Link href="/persist-exam">
-            <a className="card">
-              <h2>persist exam&rarr;</h2>
-            </a>
-          </Link>
-        </div>
+        <IssueList>
+          <IssueListItem>
+            <div className="title-wrapper">
+              <h2>규제에 가로막힌 P2E 게임</h2>
+              <p>
+                국내 첫 P2E(Play to Earn, 돈 버는 게임)인 ‘무한돌파 삼국지
+                리버스’의 서비스가 결국 중단됐습니다. '게임을 통해 획득한
+                유·무형의 결과물은 환전할 수 없다'라는 현행법 때문인데요.
+                업계에서는 블록체인 기술을 타고 P2E가 세계 게임 시장 트렌드가
+                되고 있는 상황에서 단순히 사행성을 이유로 사업을 가로막는 건
+                시대착오적 규제라고 지적합니다. 어떻게 생각하세요?
+              </p>
+            </div>
+            <div className="comment-wrapper">
+              <Link href="/">
+                <a>
+                  의견 5개 모두보기<span> &gt;</span>
+                </a>
+              </Link>
+              <ul className="comment-list">
+                <li>
+                  <span className="user-name">하영2</span>
+                  사행성 심한 게 게임만 있나 ㅋㅋ
+                </li>
+              </ul>
+            </div>
+          </IssueListItem>
+        </IssueList>
       </main>
     </HomeWrapper>
   );
@@ -42,121 +49,68 @@ export default function Home() {
 export const HomeWrapper = styled.div`
   min-height: 100vh;
   padding: 0 0.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
 
   .main {
     padding: 5rem 0;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    width: 750px;
+    margin: auto;
   }
+`;
 
-  .footer {
-    width: 100%;
-    height: 100px;
-    border-top: 1px solid #eaeaea;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+const IssueList = styled.ul``;
+
+const IssueListItem = styled.li`
+  .title-wrapper {
+    background-color: #333;
+    color: #fff;
+    padding: 50px;
+    h2 {
+      font-weight: 700;
+      font-size: 33px;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+    p {
+      font-size: 16px;
+      line-height: 140%;
+      font-weight: 200;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
   }
-
-  .footer a {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-grow: 1;
-  }
-
-  .title a {
-    color: #0070f3;
-    text-decoration: none;
-  }
-
-  .title a:hover,
-  .title a:focus,
-  .title a:active {
-    text-decoration: underline;
-  }
-
-  .title {
-    margin: 0;
-    line-height: 1.15;
-    font-size: 4rem;
-  }
-
-  .title,
-  .description {
-    text-align: center;
-  }
-
-  .description {
-    line-height: 1.5;
-    font-size: 1.5rem;
-  }
-
-  .code {
-    background: #fafafa;
-    border-radius: 5px;
-    padding: 0.75rem;
-    font-size: 1.1rem;
-    font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-      DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
-  }
-
-  .grid {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    max-width: 800px;
-    margin-top: 3rem;
-  }
-
-  .card {
-    margin: 1rem;
-    padding: 1.5rem;
-    text-align: left;
-    color: inherit;
-    text-decoration: none;
-    border: 1px solid #eaeaea;
-    border-radius: 10px;
-    transition: color 0.15s ease, border-color 0.15s ease;
-    width: 45%;
-  }
-
-  .card:hover,
-  .card:focus,
-  .card:active {
-    color: #0070f3;
-    border-color: #0070f3;
-  }
-
-  .card h2 {
-    margin: 0 0 1rem 0;
-    font-size: 1.5rem;
-  }
-
-  .card p {
-    margin: 0;
-    font-size: 1.25rem;
-    line-height: 1.5;
-  }
-
-  .logo {
-    height: 1em;
-    margin-left: 0.5rem;
-  }
-
-  @media (max-width: 600px) {
-    .grid {
+  .comment-wrapper {
+    padding: 35px;
+    background-color: #fff;
+    a {
+      color: #b0b0b0;
+      font-weight: 400;
+      font-size: 20px;
+      border-bottom: 1px solid #e0e0e0;
+      margin-bottom: 12px;
+      padding-bottom: 20px;
+      line-height: 1;
+      display: inline-block;
       width: 100%;
-      flex-direction: column;
+      span {
+        font-weight: bold;
+      }
+    }
+    .comment-list {
+      margin: 15px 0;
+      li {
+        -webkit-box-orient: vertical;
+        word-wrap: break-word;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        .user-name {
+          font-weight: 700;
+          color: #333;
+          margin-right: 15px;
+        }
+      }
     }
   }
 `;
