@@ -1,29 +1,25 @@
 import { signInUrl } from "@/api/auth";
-import { SignInUrlRequestType, SignInUrlResponseType } from "@/types/auth";
+import { SignInRequestType, SignInResponseType } from "@/types/auth";
 import { call, put, takeLatest } from "@redux-saga/core/effects";
 import { AxiosResponse } from "axios";
-import { AuthAction, SignInAction } from "../reducers/auth";
-import Router from "next/router";
+import { AuthAction, signInAction } from "../reducers/auth";
 
 function* signInSaga(action: AuthAction) {
   try {
-    const res: AxiosResponse<SignInUrlResponseType> = yield call(
+    const res: AxiosResponse<SignInResponseType> = yield call(
       signInUrl,
-      action.payload as SignInUrlRequestType
+      action.payload as SignInRequestType
     );
-    console.log(res);
     if (res.status === 200) {
-      yield put(SignInAction.success(res.data.accessToken));
-      Router.push("/");
+      yield put(signInAction.success(res.data.accessToken));
     } else {
-      yield put(SignInAction.cancel(res.data));
-      alert(res.data);
+      yield put(signInAction.cancel(res.data));
     }
   } catch (error) {
-    yield put(SignInAction.failure(error));
+    yield put(signInAction.failure(error));
   }
 }
 
 export default function* authSaga() {
-  yield takeLatest(SignInAction.request, signInSaga);
+  yield takeLatest(signInAction.request, signInSaga);
 }

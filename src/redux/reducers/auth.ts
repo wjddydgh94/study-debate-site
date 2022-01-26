@@ -1,4 +1,4 @@
-import { SignInUrlRequestType, SignInUrlResponseType } from "@/types/auth";
+import { SignInRequestType, SignInResponseType } from "@/types/auth";
 import produce from "immer";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
@@ -13,16 +13,16 @@ export const actionTypes = {
   SIGN_OUT: "auth/SIGN_OUT",
 };
 
-export const SignInAction = createAsyncAction(
+export const signInAction = createAsyncAction(
   actionTypes.SIGN_IN_REQUEST,
   actionTypes.SIGN_IN_SUCCESS,
   actionTypes.SIGN_IN_FAILURE,
   actionTypes.SIGN_IN_CANCLE
-)<SignInUrlRequestType, string, Error, SignInUrlResponseType>();
+)<SignInRequestType, string, Error, SignInResponseType>();
 
-export const SignOutAction = createAction(actionTypes.SIGN_OUT)<null>();
+export const signOutAction = createAction(actionTypes.SIGN_OUT)<null>();
 
-const actions = { SignInAction, SignOutAction };
+const actions = { signInAction, signOutAction };
 
 export type AuthAction = ActionType<typeof actions>;
 
@@ -43,11 +43,10 @@ const AuthReducer = persistReducer(
   {
     storage,
     key: "at",
-    whitelist: ["accessToken"],
+    whitelist: ["accessToken", "message"],
   },
   (state: AuthStateType = initialState, action: AuthAction) =>
     produce(state, (draft) => {
-      console.log(action);
       switch (action.type) {
         case actionTypes.SIGN_IN_REQUEST:
           draft.signInLoading = true;

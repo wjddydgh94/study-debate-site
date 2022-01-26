@@ -1,17 +1,24 @@
-import { SignInUrlRequestType } from "@/types/auth";
+import { SignInRequestType } from "@/types/auth";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
-import { SignInAction } from "@/redux/reducers/auth";
+import { useDispatch, useSelector } from "react-redux";
+import { signInAction } from "@/redux/reducers/auth";
+import { RootStateType } from "@/redux/reducers";
+import Router from "next/router";
 
 const useSignIn = () => {
   const dispatch = useDispatch();
+  const { accessToken, message } = useSelector((state: RootStateType) => {
+    return state.auth;
+  });
 
   const hookForm = useForm({
     mode: "onBlur",
   });
 
-  const handleSignIn = async (formData: SignInUrlRequestType) => {
-    dispatch(SignInAction.request(formData));
+  const handleSignIn = async (formData: SignInRequestType) => {
+    await dispatch(signInAction.request(formData));
+
+    accessToken ? Router.push("/") : alert(message);
   };
 
   return { hookForm, handleSignIn };

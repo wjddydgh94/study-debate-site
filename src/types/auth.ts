@@ -1,12 +1,12 @@
-export interface SignUpUrlRequestType
-  extends Pick<SignInUrlRequestType, "email" | "password"> {}
+export interface SignUpRequestType
+  extends Pick<SignInRequestType, "email" | "password"> {}
 
-export interface SignInUrlRequestType {
+export interface SignInRequestType {
   email: string;
   password: string;
 }
 
-export interface SignInUrlResponseType {
+export interface SignInResponseType {
   accessToken: string;
   user: {
     id: number;

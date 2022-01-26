@@ -49,11 +49,11 @@ function PersistSyncApp({
     accessToken: state.auth.accessToken,
   }));
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  useEffect(() => {
-    accessToken ? setIsLoggedIn(true) : setIsLoggedIn(false);
-  }, [accessToken]);
+  // useEffect(() => {
+  //   accessToken ? setIsLoggedIn(true) : setIsLoggedIn(false);
+  // }, [accessToken]);
 
   // let isLoggedIn = false;
 
@@ -66,7 +66,7 @@ function PersistSyncApp({
   }, [handlePersistSyncState, isSync]);
 
   return (
-    <AppLayout isLoggedIn={isLoggedIn} {...pageProps}>
+    <AppLayout isLoggedIn={accessToken} {...pageProps}>
       <Component {...pageProps} />
     </AppLayout>
   );
