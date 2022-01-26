@@ -15,8 +15,8 @@ const useSignIn = () => {
     mode: "onBlur",
   });
 
-  const handleSignIn = async (formData: SignInRequestType) => {
-    await dispatch(signInAction.request(formData));
+  const handleSignIn = (formData: SignInRequestType) => {
+    dispatch(signInAction.request(formData));
 
     accessToken ? Router.push("/") : alert(message);
   };

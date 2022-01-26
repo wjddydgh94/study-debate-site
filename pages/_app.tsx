@@ -9,6 +9,7 @@ import AppLayout from "@/components/AppLayout/AppLayout";
 import "@/styles/globals.css";
 import usePersistSync from "@/hooks/usePersistSync";
 import { PersistSyncStateType } from "@/redux/reducers/storage";
+import _ from "lodash";
 
 function RootApp(appProps: AppProps) {
   const store = useStore();
@@ -49,24 +50,16 @@ function PersistSyncApp({
     accessToken: state.auth.accessToken,
   }));
 
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  // useEffect(() => {
-  //   accessToken ? setIsLoggedIn(true) : setIsLoggedIn(false);
-  // }, [accessToken]);
-
-  // let isLoggedIn = false;
-
-  // useMemo(() => {
-  //   accessToken ? (isLoggedIn = true) : (isLoggedIn = false);
-  // }, [accessToken]);
+  const isLoggedIn: boolean = useMemo(() => {
+    return !_.isEmpty(accessToken);
+  }, [accessToken]);
 
   useEffect(() => {
     handlePersistSyncState(isSync ? "DONE" : "LOADING");
   }, [handlePersistSyncState, isSync]);
 
   return (
-    <AppLayout isLoggedIn={accessToken} {...pageProps}>
+    <AppLayout isLoggedIn={isLoggedIn} {...pageProps}>
       <Component {...pageProps} />
     </AppLayout>
   );

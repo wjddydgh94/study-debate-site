@@ -1,4 +1,4 @@
-import { signInUrl } from "@/api/auth";
+import { signInApi } from "@/api/auth";
 import { SignInRequestType, SignInResponseType } from "@/types/auth";
 import { call, put, takeLatest } from "@redux-saga/core/effects";
 import { AxiosResponse } from "axios";
@@ -7,7 +7,7 @@ import { AuthAction, signInAction } from "../reducers/auth";
 function* signInSaga(action: AuthAction) {
   try {
     const res: AxiosResponse<SignInResponseType> = yield call(
-      signInUrl,
+      signInApi,
       action.payload as SignInRequestType
     );
     if (res.status === 200) {

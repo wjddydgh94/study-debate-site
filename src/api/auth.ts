@@ -2,7 +2,7 @@ import { SignInRequestType, SignUpRequestType } from "@/types/auth";
 
 import { callApi } from "./config";
 
-export const signUpUrl = (req: SignUpRequestType) => {
+export const signUpApi = (req: SignUpRequestType) => {
   return callApi({
     url: "/register",
     method: "POST",
@@ -13,7 +13,7 @@ export const signUpUrl = (req: SignUpRequestType) => {
   });
 };
 
-export const signInUrl = (req: SignInRequestType) => {
+export const signInApi = (req: SignInRequestType) => {
   return callApi({
     url: "/login",
     method: "POST",
