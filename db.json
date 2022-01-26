@@ -23,6 +23,7 @@
       "recentComments": [
         {
           "comment": "댓글입니다. 나는 반대",
+          "userId": "용호짱짱",
           "id": 1
         }
       ]
@@ -38,10 +39,12 @@
       "recentComments": [
         {
           "comment": "댓글입니다. 나는 찬성",
+          "userId": "네건입니당",
           "id": 1
         },
         {
           "comment": "댓글입니다. 나도 찬성",
+          "userId": "나는정용호",
           "id": 2
         }
       ]
