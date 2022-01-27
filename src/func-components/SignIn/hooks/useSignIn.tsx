@@ -18,7 +18,7 @@ const useSignIn = () => {
   const handleSignIn = (formData: SignInRequestType) => {
     dispatch(signInAction.request(formData));
 
-    accessToken ? Router.push("/") : alert(message);
+    accessToken ? Router.push("/") : message ? alert(message) : null;
   };
 
   return { hookForm, handleSignIn };
