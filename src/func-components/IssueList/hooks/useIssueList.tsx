@@ -5,7 +5,7 @@ import React, { useEffect, useMemo, useState } from "react";
 const useIssueList = () => {
   const [list, setList] = useState<IssueListResponseType[] | []>();
 
-  const IssueListState = async () => {
+  const getIssueList = async () => {
     try {
       const resIssueList = await IssueListApi();
 
@@ -16,7 +16,7 @@ const useIssueList = () => {
   };
 
   useEffect(() => {
-    IssueListState();
+    getIssueList();
   }, []);
 
   return { list };
