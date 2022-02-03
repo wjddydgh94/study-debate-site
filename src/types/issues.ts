@@ -1,4 +1,6 @@
-export interface IssueListResponseType {
+export interface IssueListResponseType extends IssueResponseType {}
+
+export interface IssueResponseType {
   title: string;
   description: string;
   id: number;
