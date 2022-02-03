@@ -3,11 +3,16 @@ import styled from "styled-components";
 import useIssue from "./hooks/useIssue";
 
 interface IssueDetailPropsType {
-  issueId?: string | string[] | undefined;
+  issueId: number;
 }
 
 const IssueDetail = ({ issueId }: IssueDetailPropsType) => {
-  const { issue, agreePercentage, handleAgreeOrDisagreeButton } = useIssue({
+  const {
+    issue,
+    calcAgreePercentage,
+    handleAgreeButton,
+    handleDisagreeButton,
+  } = useIssue({
     issueId,
   });
 
@@ -18,29 +23,17 @@ const IssueDetail = ({ issueId }: IssueDetailPropsType) => {
           <>
             <h1>{issue.title}</h1>
             <p className="description">{issue.description}</p>
-            <DebateRateSection agreePercentage={agreePercentage}>
-              <p>{issue.vote.agree ? agreePercentage : 0}%</p>
+            <DebateRateSection agreePercentage={calcAgreePercentage}>
+              <p>{issue.vote.agree ? calcAgreePercentage : 0}%</p>
               <div className="rate-bar">
                 <div className="agree"></div>
                 <div className="disagree"></div>
               </div>
-              <p>{issue.vote.agree ? 100 - agreePercentage : 0}%</p>
+              <p>{issue.vote.agree ? 100 - calcAgreePercentage : 0}%</p>
             </DebateRateSection>
             <div className="button-section">
-              <button
-                onClick={() => {
-                  handleAgreeOrDisagreeButton("agree");
-                }}
-              >
-                찬성
-              </button>
-              <button
-                onClick={() => {
-                  handleAgreeOrDisagreeButton("disagree");
-                }}
-              >
-                반대
-              </button>
+              <button onClick={handleAgreeButton}>찬성</button>
+              <button onClick={handleDisagreeButton}>반대</button>
             </div>
           </>
         )}

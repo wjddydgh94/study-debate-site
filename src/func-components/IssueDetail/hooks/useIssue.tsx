@@ -1,55 +1,61 @@
-import { IssueApi, VoteAgreeApi, VoteDisagreeApi } from "@/api/issue";
+import { issueApi, voteAgreeApi, voteDisagreeApi } from "@/api/issue";
 import { IssueResponseType } from "@/types/issues";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
-interface useIssuePropsType {
-  issueId: string | string[] | undefined;
+interface UseIssuePropsType {
+  issueId: number;
 }
 
-const useIssue = ({ issueId }: useIssuePropsType) => {
+const useIssue = ({ issueId }: UseIssuePropsType) => {
   const [issue, setIssue] = useState<IssueResponseType | null>(null);
-  const [agreePercentage, setAgreePercentage] = useState(0);
 
-  const getIssue = async (issueId: string) => {
+  const calcAgreePercentage = useMemo(() => {
+    const totalVote = issue ? issue.vote.agree + issue.vote.disagree : 0;
+    const agreePercent = issue
+      ? Math.round((issue.vote.agree / totalVote) * 100)
+      : 0;
+    return agreePercent;
+  }, [issue]);
+
+  const getIssue = async ({ issueId }: UseIssuePropsType) => {
     try {
-      const res = await IssueApi({ issueId });
+      const res = await issueApi({ issueId });
       setIssue(res.data);
     } catch (e) {
       throw e;
     }
   };
 
-  useEffect(() => {
-    getIssue(issueId as string);
-  }, []);
-
-  const calcAgreePercentage = () => {
-    const totalVote = issue ? issue.vote.agree + issue.vote.disagree : 0;
-    const agreePercent = issue
-      ? Math.round((issue.vote.agree / totalVote) * 100)
-      : 0;
-    setAgreePercentage(agreePercent);
-  };
-
-  useEffect(() => {
-    calcAgreePercentage();
-  }, [issue]);
-
-  const handleAgreeOrDisagreeButton = async (type: string) => {
+  const handleAgreeButton = async () => {
     const prevAgree = issue ? issue.vote.agree : 0;
     const prevDisgree = issue ? issue.vote.disagree : 0;
     try {
-      if (type === "agree") {
-        await VoteAgreeApi({ issueId, prevAgree, prevDisgree });
-      } else {
-        await VoteDisagreeApi({ issueId, prevAgree, prevDisgree });
-      }
+      await voteAgreeApi({ issueId, prevAgree, prevDisgree });
     } catch (e) {
       throw e;
     }
   };
 
-  return { issue, agreePercentage, handleAgreeOrDisagreeButton };
+  const handleDisagreeButton = async () => {
+    const prevAgree = issue ? issue.vote.agree : 0;
+    const prevDisgree = issue ? issue.vote.disagree : 0;
+    try {
+      await voteDisagreeApi({ issueId, prevAgree, prevDisgree });
+    } catch (e) {
+      throw e;
+    }
+  };
+
+  useEffect(() => {
+    getIssue({ issueId });
+  }, []);
+
+  return {
+    issue,
+    calcAgreePercentage,
+    handleAgreeButton,
+    handleDisagreeButton,
+  };
 };
 
 export default useIssue;

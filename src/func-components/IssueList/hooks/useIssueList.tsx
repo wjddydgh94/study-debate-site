@@ -1,4 +1,4 @@
-import { IssueListApi } from "@/api/issue";
+import { issueListApi } from "@/api/issue";
 import { IssueListResponseType } from "@/types/issues";
 import React, { useEffect, useMemo, useState } from "react";
 
@@ -7,7 +7,7 @@ const useIssueList = () => {
 
   const getIssueList = async () => {
     try {
-      const resIssueList = await IssueListApi();
+      const resIssueList = await issueListApi();
 
       setList(resIssueList.data);
     } catch (e) {

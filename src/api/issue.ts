@@ -1,6 +1,6 @@
 import { callApi } from "./config";
 
-export const IssueListApi = () => {
+export const issueListApi = () => {
   return callApi({
     url: "/issues",
     method: "GET",
@@ -8,29 +8,25 @@ export const IssueListApi = () => {
 };
 
 interface IssueRequestType {
-  issueId: string;
+  issueId: number;
 }
 
-export const IssueApi = (req: IssueRequestType) => {
-  const issueId = parseInt(req.issueId);
-
+export const issueApi = (req: IssueRequestType) => {
   return callApi({
-    url: `/issues/${issueId}`,
+    url: `/issues/${req.issueId}`,
     method: "GET",
   });
 };
 
 interface VoteAgreeRequestType {
-  issueId: string | string[] | undefined;
+  issueId: number;
   prevAgree: number;
   prevDisgree: number;
 }
 
-export const VoteAgreeApi = (req: VoteAgreeRequestType) => {
-  const issueId = parseInt(req.issueId as string);
-
+export const voteAgreeApi = (req: VoteAgreeRequestType) => {
   return callApi({
-    url: `issues/${issueId}`,
+    url: `issues/${req.issueId}`,
     method: "PATCH",
     data: {
       vote: {
@@ -41,11 +37,9 @@ export const VoteAgreeApi = (req: VoteAgreeRequestType) => {
   });
 };
 
-export const VoteDisagreeApi = (req: VoteAgreeRequestType) => {
-  const issueId = parseInt(req.issueId as string);
-
+export const voteDisagreeApi = (req: VoteAgreeRequestType) => {
   return callApi({
-    url: `issues/${issueId}`,
+    url: `issues/${req.issueId}`,
     method: "PATCH",
     data: {
       vote: {
