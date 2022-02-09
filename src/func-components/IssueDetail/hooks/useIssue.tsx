@@ -1,6 +1,11 @@
-import { issueApi, voteAgreeApi, voteDisagreeApi } from "@/api/issue";
-import { IssueResponseType } from "@/types/issues";
-import React, { useEffect, useMemo, useState } from "react";
+import {
+  commentApi,
+  issueApi,
+  voteAgreeApi,
+  voteDisagreeApi,
+} from "@/api/issue";
+import { CommentsResponseType, IssueResponseType } from "@/types/issues";
+import { useEffect, useMemo, useState } from "react";
 
 interface UseIssuePropsType {
   issueId: number;
@@ -8,6 +13,7 @@ interface UseIssuePropsType {
 
 const useIssue = ({ issueId }: UseIssuePropsType) => {
   const [issue, setIssue] = useState<IssueResponseType | null>(null);
+  const [comments, setComments] = useState<CommentsResponseType | null>(null);
 
   const calcAgreePercentage = useMemo(() => {
     const totalVote = issue ? issue.vote.agree + issue.vote.disagree : 0;
@@ -46,8 +52,21 @@ const useIssue = ({ issueId }: UseIssuePropsType) => {
     }
   };
 
+  const getComments = async ({ issueId }: UseIssuePropsType) => {
+    try {
+      const res = await commentApi({ issueId });
+      setComments(res.data);
+    } catch (e) {
+      throw e;
+    }
+  };
+
   useEffect(() => {
     getIssue({ issueId });
+  }, []);
+
+  useEffect(() => {
+    getComments({ issueId });
   }, []);
 
   return {
@@ -55,6 +74,7 @@ const useIssue = ({ issueId }: UseIssuePropsType) => {
     calcAgreePercentage,
     handleAgreeButton,
     handleDisagreeButton,
+    comments,
   };
 };
 

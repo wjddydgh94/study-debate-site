@@ -49,3 +49,14 @@ export const voteDisagreeApi = (req: VoteAgreeRequestType) => {
     },
   });
 };
+
+interface CommentRequestType {
+  issueId: number;
+}
+
+export const commentApi = (req: CommentRequestType) => {
+  return callApi({
+    url: `/comments/${req.issueId}`,
+    method: "GET",
+  });
+};
