@@ -56,7 +56,31 @@ interface CommentRequestType {
 
 export const commentApi = (req: CommentRequestType) => {
   return callApi({
-    url: `/comments/${req.issueId}`,
+    url: `comments/${req.issueId}`,
     method: "GET",
+  });
+};
+
+interface RegisterCommentRequestType {
+  issueId: number;
+  comment: string;
+}
+
+export const registerCommentApi = (req: RegisterCommentRequestType) => {
+  let today = new Date();
+  let year = today.getFullYear();
+  let month = today.getMonth() + 1;
+  let date = today.getDate();
+
+  return callApi({
+    url: `comments/`,
+    method: "POST",
+    data: [
+      {
+        comment: req.comment,
+        date: `${year}.${month}.${date}`,
+        userId: "테스트용",
+      },
+    ],
   });
 };
