@@ -16,3 +16,12 @@ export interface IssueResponseType {
     }
   ];
 }
+
+export interface CommentsResponseType {
+  id: number;
+  items: { comment: string; userId: string; date: string; id: number }[];
+}
+
+export interface RegisterCommentFormDataType {
+  comment: string;
+}

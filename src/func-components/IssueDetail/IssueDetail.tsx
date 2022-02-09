@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
+import Comments from "./Comments";
+import Write from "./Comments/Write";
 import useIssue from "./hooks/useIssue";
 
 interface IssueDetailPropsType {
@@ -12,6 +14,7 @@ const IssueDetail = ({ issueId }: IssueDetailPropsType) => {
     calcAgreePercentage,
     handleAgreeButton,
     handleDisagreeButton,
+    comments,
   } = useIssue({
     issueId,
   });
@@ -38,6 +41,8 @@ const IssueDetail = ({ issueId }: IssueDetailPropsType) => {
           </>
         )}
       </AgreeSection>
+      <Write issueId={issueId} />
+      {comments && <Comments comments={comments} />}
     </Wrapper>
   );
 };
