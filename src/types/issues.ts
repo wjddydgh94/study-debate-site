@@ -18,8 +18,11 @@ export interface IssueResponseType {
 }
 
 export interface CommentsResponseType {
+  comment: string;
+  userId: string;
+  date: string;
+  issueId: string;
   id: number;
-  items: { comment: string; userId: string; date: string; id: number }[];
 }
 
 export interface RegisterCommentFormDataType {

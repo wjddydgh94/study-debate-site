@@ -19,7 +19,7 @@ interface UseIssuePropsType {
 
 const useIssue = ({ issueId }: UseIssuePropsType) => {
   const [issue, setIssue] = useState<IssueResponseType | null>(null);
-  const [comments, setComments] = useState<CommentsResponseType | null>(null);
+  const [comments, setComments] = useState<CommentsResponseType[] | null>(null);
   const hookForm = useForm({
     mode: "onBlur",
   });

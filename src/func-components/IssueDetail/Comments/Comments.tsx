@@ -2,14 +2,14 @@ import { CommentsResponseType } from "@/types/issues";
 import styled from "styled-components";
 
 interface CommentsPropsType {
-  comments: CommentsResponseType;
+  comments: CommentsResponseType[];
 }
 
 const Comments = ({ comments }: CommentsPropsType) => {
   return (
     <CommentsWrapper>
       <CommentItem>
-        {comments.items.map((item) => {
+        {comments.map((item) => {
           return (
             <div className="container" key={item.id}>
               <div className="img"></div>
@@ -34,11 +34,17 @@ const CommentsWrapper = styled.section`
 
 const CommentItem = styled.div`
   padding: 50px 0;
-  border-bottom: 1px solid #d6d6d6;
-  display: flex;
   .container {
     width: 100%;
     display: flex;
+    border-bottom: 1px solid #d6d6d6;
+    padding-bottom: 50px;
+    margin-bottom: 50px;
+    &:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
     .img {
       width: 70px;
       height: 70px;
@@ -64,9 +70,6 @@ const CommentItem = styled.div`
         margin-top: 20px;
       }
     }
-  }
-  &:last-child {
-    border-bottom: none;
   }
 `;
 
