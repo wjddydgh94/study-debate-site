@@ -101,6 +101,7 @@ export interface CallApiType {
   data?: any;
   contentType?: HttpContentType;
   config?: AxiosRequestConfig;
+  isAuth?: boolean;
 }
 
 export type HttpContentType =
@@ -115,6 +116,7 @@ export const callApi = ({
   data,
   contentType = "application/json",
   config,
+  isAuth,
 }: CallApiType) => {
   return defaultInstance({
     method: method,
@@ -124,6 +126,9 @@ export const callApi = ({
     headers: {
       "Content-Type": contentType,
     },
+    baseURL: isAuth
+      ? process.env.NEXT_PUBLIC_JSON_SERVER_AUTH
+      : process.env.NEXT_PUBLIC_JSON_SERVER,
     ...config,
   }).catch((error) => {
     console.error("api error", error);

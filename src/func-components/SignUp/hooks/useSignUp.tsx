@@ -1,5 +1,5 @@
 import { signUpApi } from "@/api/auth";
-import { SignUpUrlRequestType } from "@/types/auth";
+import { SignUpRequestType } from "@/types/auth";
 import React from "react";
 import { useForm } from "react-hook-form";
 import Router from "next/router";
@@ -9,7 +9,7 @@ const useSignUp = () => {
     mode: "onBlur",
   });
 
-  const handleSignUp = async (formData: SignUpUrlRequestType) => {
+  const handleSignUp = async (formData: SignUpRequestType) => {
     const res = await signUpApi(formData);
     if (res.status === 201) {
       alert("회원가입이 완료되었습니다.");

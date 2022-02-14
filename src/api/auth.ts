@@ -10,6 +10,7 @@ export const signUpApi = (req: SignUpRequestType) => {
       email: req.email,
       password: req.password,
     },
+    isAuth: true,
   });
 };
 
@@ -21,5 +22,6 @@ export const signInApi = (req: SignInRequestType) => {
       email: req.email,
       password: req.password,
     },
+    isAuth: true,
   });
 };
