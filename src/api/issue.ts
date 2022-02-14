@@ -56,7 +56,7 @@ interface CommentRequestType {
 
 export const commentApi = (req: CommentRequestType) => {
   return callApi({
-    url: `comments/${req.issueId}`,
+    url: `comments?issueId=${req.issueId}`,
     method: "GET",
   });
 };
@@ -73,14 +73,12 @@ export const registerCommentApi = (req: RegisterCommentRequestType) => {
   let date = today.getDate();
 
   return callApi({
-    url: `comments/`,
+    url: `issues/${req.issueId}/comments/`,
     method: "POST",
-    data: [
-      {
-        comment: req.comment,
-        date: `${year}.${month}.${date}`,
-        userId: "테스트용",
-      },
-    ],
+    data: {
+      comment: req.comment,
+      date: `${year}.${month}.${date}`,
+      userId: "테스트용",
+    },
   });
 };
