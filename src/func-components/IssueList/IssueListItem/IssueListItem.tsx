@@ -15,7 +15,7 @@ const IssueListItem = ({ item }: IssueListItemPropsType) => {
         <p>{item.description}</p>
       </div>
       <div className="comment-wrapper">
-        <Link href={`/issue/${item.id}`}>
+        {/* <Link href={`/issue/${item.id}`}>
           <a>
             의견 {item.recentComments.length}개 모두보기<span> &gt;</span>
           </a>
@@ -29,7 +29,7 @@ const IssueListItem = ({ item }: IssueListItemPropsType) => {
               </li>
             );
           })}
-        </ul>
+        </ul> */}
       </div>
     </Item>
   );

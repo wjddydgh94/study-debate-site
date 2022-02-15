@@ -6,7 +6,7 @@ const IssueDetailPage = () => {
   const router = useRouter();
   const { issueId } = router.query;
 
-  return <IssueDetail issueId={issueId} />;
+  return <IssueDetail issueId={parseInt(issueId as string)} />;
 };
 
 export default IssueDetailPage;
