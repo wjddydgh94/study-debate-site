@@ -1,15 +1,13 @@
 import styled from "styled-components";
-import useIssue from "../../hooks/useIssue";
+import { useFormContext } from "react-hook-form";
+import { RegisterCommentFormDataType } from "@/types/issues";
 
 interface WritePropsType {
-  issueId: number;
+  handleRegistComment: (formData: RegisterCommentFormDataType) => void;
 }
 
-const Write = ({ issueId }: WritePropsType) => {
-  const {
-    hookForm: { register, handleSubmit },
-    handleRegistComment,
-  } = useIssue({ issueId });
+const Write = ({ handleRegistComment }: WritePropsType) => {
+  const { handleSubmit, register } = useFormContext();
   return (
     <WriteWrapper>
       <form onSubmit={handleSubmit(handleRegistComment)}>

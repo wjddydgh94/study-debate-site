@@ -1,8 +1,10 @@
+import { stringify } from "querystring";
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import Comments from "./Comments";
 import Write from "./Comments/Write";
 import useIssue from "./hooks/useIssue";
+import { FormProvider } from "react-hook-form";
 
 interface IssueDetailPropsType {
   issueId: number;
@@ -15,35 +17,39 @@ const IssueDetail = ({ issueId }: IssueDetailPropsType) => {
     handleAgreeButton,
     handleDisagreeButton,
     comments,
+    hookForm,
+    handleRegistComment,
   } = useIssue({
     issueId,
   });
 
   return (
-    <Wrapper>
-      <AgreeSection>
-        {issue && (
-          <>
-            <h1>{issue.title}</h1>
-            <p className="description">{issue.description}</p>
-            <DebateRateSection agreePercentage={calcAgreePercentage}>
-              <p>{issue.vote.agree ? calcAgreePercentage : 0}%</p>
-              <div className="rate-bar">
-                <div className="agree"></div>
-                <div className="disagree"></div>
+    <FormProvider {...hookForm}>
+      <Wrapper>
+        <AgreeSection>
+          {issue && (
+            <>
+              <h1>{issue.title}</h1>
+              <p className="description">{issue.description}</p>
+              <DebateRateSection agreePercentage={calcAgreePercentage}>
+                <p>{issue.vote.agree ? calcAgreePercentage : 0}%</p>
+                <div className="rate-bar">
+                  <div className="agree"></div>
+                  <div className="disagree"></div>
+                </div>
+                <p>{issue.vote.agree ? 100 - calcAgreePercentage : 0}%</p>
+              </DebateRateSection>
+              <div className="button-section">
+                <button onClick={handleAgreeButton}>찬성</button>
+                <button onClick={handleDisagreeButton}>반대</button>
               </div>
-              <p>{issue.vote.agree ? 100 - calcAgreePercentage : 0}%</p>
-            </DebateRateSection>
-            <div className="button-section">
-              <button onClick={handleAgreeButton}>찬성</button>
-              <button onClick={handleDisagreeButton}>반대</button>
-            </div>
-          </>
-        )}
-      </AgreeSection>
-      <Write issueId={issueId} />
-      {comments && <Comments comments={comments} />}
-    </Wrapper>
+            </>
+          )}
+        </AgreeSection>
+        <Write handleRegistComment={handleRegistComment} />
+        {comments && <Comments comments={comments} />}
+      </Wrapper>
+    </FormProvider>
   );
 };
 
